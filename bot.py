@@ -7,9 +7,11 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
+#these two are tests atm
 jaydnid = 947418695192436756
 smallsid = 429634654190960650
 bannedidlist = [jaydnid, smallsid]
+#lets you add more people to the banned list
 while True:
     print("Banned ID list: ", bannedidlist)
     print("Enter the ID of the user you want to ban from messaging snake. If you are done, type 'done'")
@@ -17,12 +19,19 @@ while True:
     if bannedid == "done":
         break
     bannedidlist.append(int(bannedid))
+#possible replys to blacklisted users
 possiblereply = ["shut up", "stop", "no", "nope", "nah", "stop being weird", "you arent allowed to message snake", "think before you speak", "back off my goat", "SOMEONE HELP","negative", "nuh-uh", "no way", "not happening", "forget it", "MODS HELP "  ]
+
+
+
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
-    await client.change_presence(activity=discord.Game(name="with ideas to counteract people being weird"))
-@client.event # this part is telling to listen and respond
+
+
+
+#this part of the code is what makes the bot reply to messages
+@client.event 
 async def on_message(message):
     if message.author == client.user:
         return
@@ -34,5 +43,7 @@ async def on_message(message):
         print("message found")
         await message.channel.send(random.choice(possiblereply), reference=message)
 
+
+#api key 
 apikey = input("Enter your bot token: ")
 client.run(apikey)
