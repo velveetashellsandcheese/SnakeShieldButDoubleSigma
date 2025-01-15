@@ -9,6 +9,7 @@ client = discord.Client(intents=intents)
 
 jaydnid = 947418695192436756
 smallsid = 429634654190960650
+bannedidlist = [jaydnid, smallsid]
 possiblereply = ["shut up", "stop", "no", "nope", "nah", "stop being weird", "you arent allowed to message snake", "think before you speak"]
 @client.event
 async def on_ready():
@@ -18,10 +19,10 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-    if "snake" in message.content and message.author.id == jaydnid or message.author.id == smallsid and "snake" in message.content:
+    if "snake" in message.content and message.author.id in bannedidlist:
         print("message found")
         await message.channel.send(random.choice(possiblereply), reference=message)
-    elif "SNAKE" in message.content and message.author.id == jaydnid or message.author.id == smallsid and "SNAKE" in message.content:
+    elif "SNAKE" in message.content and message.author.id in bannedidlist:      
         print("message found")
         await message.channel.send(random.choice(possiblereply), reference=message)
 
