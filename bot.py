@@ -17,7 +17,7 @@ while True:
     if bannedid == "done":
         break
     bannedidlist.append(int(bannedid))
-possiblereply = ["shut up", "stop", "no", "nope", "nah", "stop being weird", "you arent allowed to message snake", "think before you speak"]
+possiblereply = ["shut up", "stop", "no", "nope", "nah", "stop being weird", "you arent allowed to message snake", "think before you speak", "back off my goat", "SOMEONE HELP","negative", "nuh-uh", "no way", "not happening", "forget it", "MODS HELP "  ]
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
@@ -26,6 +26,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+    message.content = message.content.lower()   
     if "snake" in message.content and message.author.id in bannedidlist:
         print("message found")
         await message.channel.send(random.choice(possiblereply), reference=message)
